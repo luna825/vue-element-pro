@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
 
 Vue.use(Router);
 
@@ -9,18 +8,73 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
-      name: "home",
-      component: Home
+      path: "/user",
+      hideInMenu: true,
+      component: () =>
+        import(/* webpackChunkName: "layout" */ "./layouts/UserLayout.vue"),
+      children: [
+        {
+          path: "/user",
+          redirect: "/user/login"
+        },
+        {
+          path: "/user/login",
+          name: "login",
+          component: () =>
+            import(/* webpackChunkName: "user" */ "./views/User/Login.vue")
+        },
+        {
+          path: "/user/register",
+          name: "register",
+          component: () =>
+            import(/* webpackChunkName: "user" */ "./views/User/Register.vue")
+        }
+      ]
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      path: "/",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+        import(/* webpackChunkName: "layout" */ "./layouts/BasicLayout.vue"),
+      children: [
+        {
+          path: "/",
+          redirect: "/dashboard/analysis"
+        },
+        {
+          path: "/dashboard",
+          name: "dashboard",
+          meta: { icon: "el-icon-s-data", title: "仪表盘" },
+          component: { render: h => h("router-view") },
+          children: [
+            {
+              path: "/dashboard/analysis",
+              meta: { title: "分析页" },
+              name: "analysis",
+              component: () =>
+                import(
+                  /* webpackChunkName: "dashboard" */ "./views/Dashboard/Analysis.vue"
+                )
+            }
+          ]
+        },
+        {
+          path: "/form",
+          name: "form",
+          meta: { title: "表单页", icon: "el-icon-s-platform" },
+          component: { render: h => h("router-view") },
+          children: [
+            {
+              path: "/from/basic-form",
+              name: "basicform",
+              meta: { title: "基础表单" },
+              component: () =>
+                import(
+                  /* webpackChunkName: "dashboard" */ "./views/Form/BasicForm.vue"
+                )
+            }
+          ]
+        }
+      ]
     }
   ]
 });
