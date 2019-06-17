@@ -13,8 +13,9 @@ import store from "./store";
 
 import "normalize.css/normalize.css";
 import "element-ui/lib/theme-chalk/index.css";
-
 import "@/styles/index.scss"; //全局样式
+
+import "./icons"; // icon
 
 Vue.config.productionTip = false;
 Vue.prototype.$ELEMENT = { size: "small", zIndex: 3000 };
