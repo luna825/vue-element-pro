@@ -2,60 +2,59 @@
   <div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        :default-active="activeMenu"
+        :default-active="selectKey"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
       >
-        <template v-for="item in menuData">
-          <el-menu-item v-if="!item.children" :key="item.path">
-            <i v-if="item.meta.icon" :class="item.meta.icon"></i>
-            <span slot="title">{{ item.meta.title }}</span>
-          </el-menu-item>
-
-          <sub-menu v-else :menu-info="item" :key="item.path" />
-        </template>
+        <sidebar-item
+          v-for="route in menuData"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
 <script>
-import SubMenu from "./SubMenu.vue";
+import SidebarItem from "./SidebarItem.vue";
 import variables from "@/styles/variables.scss";
 export default {
   name: "Sidebar",
-  components: { SubMenu },
+  components: { SidebarItem },
   computed: {
     variables() {
       return variables;
-    },
-    activeMenu() {
-      const route = this.$route;
-      const { meta, path } = route;
-      // if set path, the sidebar will highlight the path you set
-      if (meta.activeMenu) {
-        return meta.activeMenu;
-      }
-      return path;
+    }
+  },
+  watch: {
+    "$route.path": function(val) {
+      this.selectKey = this.selectKeyMap[val];
     }
   },
   data() {
+    this.selectKeyMap = {};
     const menuData = this.getMenuData(this.$router.options.routes);
     return {
-      menuData
+      menuData,
+      selectKey: this.selectKeyMap[this.$route.path]
     };
   },
   methods: {
-    getMenuData(routes) {
+    getMenuData(routes = [], selectKey) {
       const menuData = [];
       routes.forEach(item => {
         if (item.name && !item.hideInMenu) {
+          this.selectKeyMap[item.path] = selectKey || item.path;
           const newItem = { ...item };
           delete newItem.children;
           if (item.children && !item.hideChildrenInMenu) {
             newItem.children = this.getMenuData(item.children);
+          } else {
+            this.getMenuData(item.children, selectKey || item.path);
           }
           menuData.push(newItem);
         } else if (

@@ -64,17 +64,43 @@ export default new Router({
           component: { render: h => h("router-view") },
           children: [
             {
-              path: "/from/basic-form",
+              path: "/form/basic-form",
               name: "basicform",
               meta: { title: "基础表单" },
               component: () =>
                 import(
                   /* webpackChunkName: "dashboard" */ "./views/Form/BasicForm.vue"
-                )
+                ),
+              children: [
+                {
+                  path: "/form/basic-form",
+                  redirect: "/form/basic-form/form1"
+                },
+                {
+                  path: "/form/basic-form/form1",
+                  name: "form1",
+                  meta: { title: "表单1" }
+                },
+                {
+                  path: "/form/basic-form/form2",
+                  name: "form2",
+                  meta: { title: "表单2" }
+                },
+                {
+                  path: "/form/basic-form/form3",
+                  name: "form3",
+                  meta: { title: "表单3" }
+                }
+              ]
             }
           ]
         }
       ]
+    },
+    {
+      path: "https://www.baidu.com",
+      name: "baidu",
+      meta: { title: "百度" }
     }
   ]
 });
