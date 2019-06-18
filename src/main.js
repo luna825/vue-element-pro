@@ -9,7 +9,7 @@ import {
   Scrollbar
 } from "element-ui";
 import router from "./router";
-import store from "./store";
+import store from "./store/index";
 
 import "normalize.css/normalize.css";
 import "element-ui/lib/theme-chalk/index.css";

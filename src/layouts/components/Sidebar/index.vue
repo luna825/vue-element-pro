@@ -3,10 +3,13 @@
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="selectKey"
+        :collapse="isCollapse"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
+        :unique-opened="false"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
+        mode="vertical"
       >
         <sidebar-item
           v-for="route in menuData"
@@ -20,14 +23,19 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import SidebarItem from "./SidebarItem.vue";
 import variables from "@/styles/variables.scss";
 export default {
   name: "Sidebar",
   components: { SidebarItem },
   computed: {
+    ...mapGetters(["sidebar"]),
     variables() {
       return variables;
+    },
+    isCollapse() {
+      return !this.sidebar.opened;
     }
   },
   watch: {

@@ -43,7 +43,7 @@ export default new Router({
         {
           path: "/dashboard",
           name: "dashboard",
-          meta: { icon: "el-icon-s-data", title: "仪表盘" },
+          meta: { icon: "dashboard", title: "仪表盘" },
           component: { render: h => h("router-view") },
           children: [
             {
@@ -60,7 +60,7 @@ export default new Router({
         {
           path: "/form",
           name: "form",
-          meta: { title: "表单页", icon: "el-icon-s-platform" },
+          meta: { title: "表单页", icon: "form" },
           component: { render: h => h("router-view") },
           children: [
             {
