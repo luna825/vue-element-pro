@@ -8,8 +8,8 @@ import {
   Scrollbar,
   Form,
   FormItem,
-  Tabs,
-  TabPane
+  Input,
+  Tooltip
 } from "element-ui";
 import router from "./router/index.js";
 import store from "./store/index";
@@ -21,7 +21,7 @@ import "@/styles/index.scss"; //全局样式
 import "./icons"; // icon
 
 Vue.config.productionTip = false;
-Vue.prototype.$ELEMENT = { size: "small", zIndex: 3000 };
+Vue.prototype.$ELEMENT = { size: "medium", zIndex: 3000 };
 Vue.use(Button);
 Vue.use(Menu);
 Vue.use(MenuItem);
@@ -29,8 +29,8 @@ Vue.use(Submenu);
 Vue.use(Scrollbar);
 Vue.use(Form);
 Vue.use(FormItem);
-Vue.use(Tabs);
-Vue.use(TabPane);
+Vue.use(Input);
+Vue.use(Tooltip);
 
 new Vue({
   router,
