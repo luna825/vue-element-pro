@@ -5,10 +5,13 @@ import {
   Menu,
   Submenu,
   MenuItem,
-  MenuItemGroup,
-  Scrollbar
+  Scrollbar,
+  Form,
+  FormItem,
+  Tabs,
+  TabPane
 } from "element-ui";
-import router from "./router";
+import router from "./router/index.js";
 import store from "./store/index";
 
 import "normalize.css/normalize.css";
@@ -22,9 +25,12 @@ Vue.prototype.$ELEMENT = { size: "small", zIndex: 3000 };
 Vue.use(Button);
 Vue.use(Menu);
 Vue.use(MenuItem);
-Vue.use(MenuItemGroup);
 Vue.use(Submenu);
 Vue.use(Scrollbar);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Tabs);
+Vue.use(TabPane);
 
 new Vue({
   router,

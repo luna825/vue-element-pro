@@ -1,8 +1,6 @@
 const state = {
   sidebar: {
-    opened: JSON.parse(localStorage.getItem("sidebarStatus"))
-      ? !!+JSON.parse(localStorage.getItem("sidebarStatus"))
-      : false,
+    opened: true,
     withoutAnimation: false
   }
 };
@@ -11,11 +9,6 @@ const mutations = {
   TOGGLE_SIDEBAR: state => {
     state.sidebar.opened = !state.sidebar.opened;
     state.sidebar.withoutAnimation = false;
-    if (state.sidebar.opened) {
-      localStorage.setItem("sidebarStatus", 1);
-    } else {
-      localStorage.setItem("sidebarStatus", 0);
-    }
   }
 };
 

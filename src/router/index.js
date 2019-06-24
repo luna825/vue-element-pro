@@ -11,7 +11,7 @@ export default new Router({
       path: "/user",
       hideInMenu: true,
       component: () =>
-        import(/* webpackChunkName: "layout" */ "./layouts/UserLayout.vue"),
+        import(/* webpackChunkName: "layout" */ "@/layouts/UserLayout.vue"),
       children: [
         {
           path: "/user",
@@ -21,20 +21,20 @@ export default new Router({
           path: "/user/login",
           name: "login",
           component: () =>
-            import(/* webpackChunkName: "user" */ "./views/User/Login.vue")
+            import(/* webpackChunkName: "user" */ "@/views/User/Login.vue")
         },
         {
           path: "/user/register",
           name: "register",
           component: () =>
-            import(/* webpackChunkName: "user" */ "./views/User/Register.vue")
+            import(/* webpackChunkName: "user" */ "@/views/User/Register.vue")
         }
       ]
     },
     {
       path: "/",
       component: () =>
-        import(/* webpackChunkName: "layout" */ "./layouts/BasicLayout.vue"),
+        import(/* webpackChunkName: "layout" */ "@/layouts/BasicLayout.vue"),
       children: [
         {
           path: "/",
@@ -52,7 +52,7 @@ export default new Router({
               name: "analysis",
               component: () =>
                 import(
-                  /* webpackChunkName: "dashboard" */ "./views/Dashboard/Analysis.vue"
+                  /* webpackChunkName: "dashboard" */ "@/views/Dashboard/Analysis.vue"
                 )
             }
           ]
@@ -69,7 +69,7 @@ export default new Router({
               meta: { title: "基础表单" },
               component: () =>
                 import(
-                  /* webpackChunkName: "dashboard" */ "./views/Form/BasicForm.vue"
+                  /* webpackChunkName: "dashboard" */ "@/views/Form/BasicForm.vue"
                 ),
               children: [
                 {
@@ -100,7 +100,7 @@ export default new Router({
     {
       path: "https://www.baidu.com",
       name: "baidu",
-      meta: { title: "百度" }
+      meta: { title: "百度", icon: "baidu" }
     }
   ]
 });

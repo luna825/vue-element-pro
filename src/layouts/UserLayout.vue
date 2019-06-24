@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div>Vue Element Pro</div>
+  <div class="main">
     <router-view></router-view>
   </div>
 </template>
@@ -9,4 +8,10 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.main {
+  width: 100%;
+  min-height: 100%;
+  background: #fafafa;
+}
+</style>
