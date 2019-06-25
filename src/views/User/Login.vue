@@ -10,7 +10,7 @@
         <div class="login-form-logo">用户登录</div>
         <div class="login-form-content">
           <!-- 用户名form -->
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               ref="username"
               v-model="loginForm.username"
@@ -29,7 +29,7 @@
             placement="right"
             manual
           >
-            <el-form-item>
+            <el-form-item prop="password">
               <el-input
                 :key="passwordType"
                 ref="password"
@@ -115,7 +115,6 @@ export default {
     //用户登录
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        console.log(valid);
         if (valid) {
           this.loading = true;
           this.$store

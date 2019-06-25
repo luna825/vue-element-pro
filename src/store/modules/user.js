@@ -1,5 +1,5 @@
-import { login } from "@/api/user";
-import { setToken } from "@/utils/auth";
+import { login, getInfo } from "@/api/user";
+import { setToken, getToken } from "@/utils/auth";
 
 const state = {
   name: "",
@@ -9,8 +9,11 @@ const state = {
 };
 
 const mutations = {
-  SET_USER_INFO: (state, info) => {
-    state = { ...state, ...info };
+  SET_USER_INFO: (state, { name, avatar, introduction, roles }) => {
+    state.name = name;
+    state.avatar = avatar;
+    state.introduction = introduction;
+    state.roles = roles;
   }
 };
 
@@ -24,6 +27,24 @@ const actions = {
           const { data } = response;
           setToken(data.token);
           resolve();
+        })
+        .catch(error => reject(error));
+    });
+  },
+  getInfo({ commit }) {
+    return new Promise((resolve, reject) => {
+      getInfo(getToken())
+        .then(response => {
+          const { data } = response;
+
+          if (!data) {
+            reject("Verification failed, please Login again!");
+          }
+          if (!data.roles || data.roles.length <= 0) {
+            reject("getInfo: roles must be a non-null array!");
+          }
+          commit("SET_USER_INFO", data);
+          resolve(data);
         })
         .catch(error => reject(error));
     });

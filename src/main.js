@@ -19,6 +19,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import "@/styles/index.scss"; //全局样式
 
 import "./icons"; // icon
+import "./permission"; // 路由守卫
 
 Vue.config.productionTip = false;
 Vue.prototype.$ELEMENT = { size: "medium", zIndex: 3000 };
