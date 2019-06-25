@@ -1,7 +1,12 @@
 <template>
   <div class="login-container">
     <div class="login-form">
-      <el-form class="login-form-main">
+      <el-form
+        class="login-form-main"
+        ref="loginForm"
+        :model="loginForm"
+        :rules="loginRules"
+      >
         <div class="login-form-logo">用户登录</div>
         <div class="login-form-content">
           <!-- 用户名form -->
@@ -53,15 +58,38 @@
 </template>
 
 <script>
-import axios from "axios";
+import { validUsername } from "@/utils/validate.js";
 export default {
   name: "Login",
   data() {
+    const validateUsername = (rule, value, callback) => {
+      console.log(value);
+      if (!validUsername(value)) {
+        callback(new Error("Please enter the correct user name"));
+      } else {
+        callback();
+      }
+    };
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error("The password can not be less than 6 digits"));
+      } else {
+        callback();
+      }
+    };
     return {
       activeName: "email",
       loginForm: {
         username: "admin",
         password: "111111"
+      },
+      loginRules: {
+        username: [
+          { required: true, trigger: "blur", validator: validateUsername }
+        ],
+        password: [
+          { required: true, trigger: "blur", validator: validatePassword }
+        ]
       },
       passwordType: "password",
       capsTooltip: false,
@@ -86,8 +114,26 @@ export default {
     },
     //用户登录
     handleLogin() {
-      axios.post("/dev-api/user/login", this.loginForm).then(res => {
-        console.log(res.data);
+      this.$refs.loginForm.validate(valid => {
+        console.log(valid);
+        if (valid) {
+          this.loading = true;
+          this.$store
+            .dispatch("user/login", this.loginForm)
+            .then(() => {
+              this.$router.push({
+                path: this.redirect || "/",
+                query: this.otherQuery
+              });
+              this.loading = false;
+            })
+            .catch(() => {
+              this.loading = false;
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
       });
     }
   }

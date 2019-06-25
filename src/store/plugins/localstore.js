@@ -5,7 +5,9 @@ export default store => {
     store.replaceState(JSON.parse(localStorage.getItem("vue-pro-state")));
   store.subscribe((mutation, state) => {
     try {
-      localStorage.setItem("vue-pro-state", JSON.stringify(state));
+      const newState = { ...state };
+      delete newState.user;
+      localStorage.setItem("vue-pro-state", JSON.stringify(newState));
     } catch (error) {
       console.log("持久化遇到错误");
       console.error(error);
