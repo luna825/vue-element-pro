@@ -13,6 +13,18 @@ module.exports = {
       }
     }
   },
+  devServer: {
+    proxy: {
+      [process.env.VUE_APP_BASE_API]: {
+        target: `http://localhost:8080/mock`,
+        changeOrigin: true,
+        pathRewrite: {
+          ["^" + process.env.VUE_APP_BASE_API]: ""
+        }
+      }
+    },
+    after: require("./mock/mock-server.js")
+  },
   chainWebpack(config) {
     // set svg-sprite-loader
     config.module

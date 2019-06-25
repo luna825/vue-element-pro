@@ -45,7 +45,6 @@
             @click.native.prevent="handleLogin"
             >Login</el-button
           >
-
           <div class="third-login"></div>
         </div>
       </el-form>
@@ -54,6 +53,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Login",
   data() {
@@ -85,7 +85,11 @@ export default {
       }
     },
     //用户登录
-    handleLogin() {}
+    handleLogin() {
+      axios.post("/dev-api/user/login", this.loginForm).then(res => {
+        console.log(res.data);
+      });
+    }
   }
 };
 </script>
