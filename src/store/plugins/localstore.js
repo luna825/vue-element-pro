@@ -5,7 +5,7 @@ export default store => {
   if (localStore)
     store.replaceState(Object.assign(store.state, JSON.parse(localStore)));
   store.subscribe((mutation, state) => {
-    if (mutation.type !== "SET_USER_INFO") {
+    if (mutation.type === "app/TOGGLE_SIDEBAR") {
       try {
         const { app } = state;
         const newState = { app };

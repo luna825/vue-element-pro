@@ -93,11 +93,6 @@ export const constantRoutes = [
         ]
       }
     ]
-  },
-  {
-    path: "https://www.baidu.com",
-    name: "baidu",
-    meta: { title: "百度", icon: "baidu" }
   }
 ];
 
@@ -105,7 +100,7 @@ export const asyncRoutes = [
   {
     path: "/permission",
     name: "Permission",
-    meta: { title: "权限测试", roles: ["admin"] },
+    meta: { title: "权限测试", icon: "lock", roles: ["admin"] },
     component: () =>
       import(/* webpackChunkName: "layout" */ "@/layouts/BasicLayout.vue"),
     children: [
@@ -119,6 +114,11 @@ export const asyncRoutes = [
           )
       }
     ]
+  },
+  {
+    path: "https://www.baidu.com",
+    name: "baidu",
+    meta: { title: "百度", icon: "baidu" }
   }
 ];
 
