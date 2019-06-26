@@ -45,7 +45,7 @@ export default {
   },
   data() {
     this.selectKeyMap = {};
-    const menuData = this.getMenuData(this.$router.options.routes);
+    const menuData = this.getMenuData(this.$store.getters.routes);
     return {
       menuData,
       selectKey: this.selectKeyMap[this.$route.path]

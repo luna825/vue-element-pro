@@ -95,6 +95,18 @@ export default {
       loading: false
     };
   },
+  watch: {
+    $route: {
+      handler: function(route) {
+        const query = route.query;
+        if (query) {
+          this.redirect = query.redirect;
+          this.otherQuery = this.getOtherQuery(query);
+        }
+      },
+      immediate: true
+    }
+  },
   methods: {
     checkCapslock({ shiftKey, key } = {}) {
       if (key && key.length === 1) {
@@ -133,6 +145,14 @@ export default {
           return false;
         }
       });
+    },
+    getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== "redirect") {
+          acc[cur] = query[cur];
+        }
+        return acc;
+      }, {});
     }
   }
 };

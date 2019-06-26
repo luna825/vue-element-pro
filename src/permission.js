@@ -18,7 +18,13 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           //get user info
-          await store.dispatch("user/getInfo");
+          const { roles } = await store.dispatch("user/getInfo");
+          // 添加异步路由
+          const accessRoutes = await store.dispatch(
+            "permission/generateRoutes",
+            roles
+          );
+          router.addRoutes(accessRoutes);
           next({ ...to, replace: true });
         } catch (error) {
           next(`/user/login?redirect=${to.path}`);
