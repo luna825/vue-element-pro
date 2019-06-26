@@ -1,8 +1,10 @@
 export default store => {
   // 已经初始化
   // 不能 store.state = '' 直接赋值方式改变 state
-  if (localStorage.getItem("vue-pro-state"))
-    store.replaceState(JSON.parse(localStorage.getItem("vue-pro-state")));
+  const localStore = localStorage.getItem("vue-pro-state");
+  if (localStore)
+    store.replaceState(Object.assign(store.state, JSON.parse(localStore)));
+  console.log("eee");
   store.subscribe((mutation, state) => {
     try {
       const newState = { ...state };

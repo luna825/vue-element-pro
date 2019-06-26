@@ -9,19 +9,16 @@ router.beforeEach(async (to, from, next) => {
 
   if (hasToken) {
     if (to.path === "/user/login") {
-      console.log(hasToken, "123");
-      next({ path: "/" });
+      next("/");
     } else {
       const hasRoles =
         store.getters.user && store.getters.user.roles.length > 0;
       if (hasRoles) {
-        console.log(hasRoles);
         next();
       } else {
         try {
           //get user info
-          const { roles } = await store.dispatch("user/getInfo");
-          console.log(roles);
+          await store.dispatch("user/getInfo");
           next({ ...to, replace: true });
         } catch (error) {
           next(`/user/login?redirect=${to.path}`);
