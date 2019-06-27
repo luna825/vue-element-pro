@@ -64,6 +64,7 @@ export const constantRoutes = [
             path: "/form/basic-form",
             name: "basicform",
             meta: { title: "基础表单" },
+            hideChildrenInMenu: true,
             component: () =>
               import(
                 /* webpackChunkName: "dashboard" */ "@/views/Form/BasicForm.vue"
@@ -129,6 +130,7 @@ export const asyncRoutes = [
       },
       {
         path: "/error/404",
+        name: "404",
         component: () =>
           import(
             /* webpackChunkName: "dashboard" */ "@/views/ErrorPage/404.vue"

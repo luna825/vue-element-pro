@@ -39,8 +39,10 @@ export default {
     }
   },
   watch: {
-    "$route.path": function(val) {
-      this.selectKey = this.selectKeyMap[val];
+    "$route.path": {
+      handler: function(val) {
+        this.selectKey = this.selectKeyMap[val];
+      }
     }
   },
   data() {
