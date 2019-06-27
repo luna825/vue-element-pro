@@ -1,9 +1,25 @@
 <template>
-  <div><router-view></router-view></div>
+  <section class="app-main">
+    <router-view :key="key"></router-view>
+  </section>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "AppMain",
+  computed: {
+    key() {
+      return this.$route.path;
+    }
+  }
+};
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.app-main {
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+</style>

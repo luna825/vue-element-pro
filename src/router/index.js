@@ -116,10 +116,32 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: "/error",
+    name: "NotFound",
+    meta: { title: "错误页面", icon: "404" },
+    hideChildrenInMenu: true,
+    component: () =>
+      import(/* webpackChunkName: "layout" */ "@/layouts/BasicLayout.vue"),
+    children: [
+      {
+        path: "/error",
+        redirect: "/error/404"
+      },
+      {
+        path: "/error/404",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard" */ "@/views/ErrorPage/404.vue"
+          )
+      }
+    ]
+  },
+  {
     path: "https://www.baidu.com",
     name: "baidu",
     meta: { title: "百度", icon: "baidu" }
-  }
+  },
+  { path: "*", redirect: "/error/404", hidden: true }
 ];
 
 const createRouter = () =>
