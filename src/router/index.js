@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import Layout from "@/layouts/BasicLayout";
 
 Vue.use(Router);
 
@@ -30,8 +31,7 @@ export const constantRoutes = [
   },
   {
     path: "/",
-    component: () =>
-      import(/* webpackChunkName: "layout" */ "@/layouts/BasicLayout.vue"),
+    component: Layout,
     children: [
       {
         path: "/",
@@ -67,7 +67,7 @@ export const constantRoutes = [
             hideChildrenInMenu: true,
             component: () =>
               import(
-                /* webpackChunkName: "dashboard" */ "@/views/Form/BasicForm.vue"
+                /* webpackChunkName: "form" */ "@/views/Form/BasicForm.vue"
               ),
             children: [
               {
@@ -102,8 +102,7 @@ export const asyncRoutes = [
     path: "/permission",
     name: "Permission",
     meta: { title: "权限测试", icon: "lock", roles: ["admin"] },
-    component: () =>
-      import(/* webpackChunkName: "layout" */ "@/layouts/BasicLayout.vue"),
+    component: Layout,
     children: [
       {
         path: "/permission/page",
@@ -111,7 +110,7 @@ export const asyncRoutes = [
         meta: { title: "页面测试" },
         component: () =>
           import(
-            /* webpackChunkName: "dashboard" */ "@/views/Permission/Page.vue"
+            /* webpackChunkName: "permission" */ "@/views/Permission/Page.vue"
           )
       }
     ]
@@ -121,8 +120,7 @@ export const asyncRoutes = [
     name: "NotFound",
     meta: { title: "错误页面", icon: "404" },
     hideChildrenInMenu: true,
-    component: () =>
-      import(/* webpackChunkName: "layout" */ "@/layouts/BasicLayout.vue"),
+    component: Layout,
     children: [
       {
         path: "/error",
@@ -132,9 +130,7 @@ export const asyncRoutes = [
         path: "/error/404",
         name: "404",
         component: () =>
-          import(
-            /* webpackChunkName: "dashboard" */ "@/views/ErrorPage/404.vue"
-          )
+          import(/* webpackChunkName: "error" */ "@/views/ErrorPage/404.vue")
       }
     ]
   },
@@ -143,7 +139,7 @@ export const asyncRoutes = [
     name: "baidu",
     meta: { title: "百度", icon: "baidu" }
   },
-  { path: "*", redirect: "/error/404", hidden: true }
+  { path: "*", redirect: "/error/404" }
 ];
 
 const createRouter = () =>
