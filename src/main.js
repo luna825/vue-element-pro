@@ -9,7 +9,9 @@ import {
   Form,
   FormItem,
   Input,
-  Tooltip
+  Tooltip,
+  Breadcrumb,
+  BreadcrumbItem
 } from "element-ui";
 import router from "./router/index.js";
 import store from "./store/index";
@@ -32,6 +34,8 @@ Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Tooltip);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
 
 new Vue({
   router,

@@ -44,6 +44,10 @@ export const constantRoutes = [
         component: { render: h => h("router-view") },
         children: [
           {
+            path: "/dashboard",
+            redirect: "/dashboard/analysis"
+          },
+          {
             path: "/dashboard/analysis",
             meta: { title: "分析页" },
             name: "analysis",
@@ -60,6 +64,10 @@ export const constantRoutes = [
         meta: { title: "表单页", icon: "form" },
         component: { render: h => h("router-view") },
         children: [
+          {
+            path: "/form",
+            redirect: "/form/basic-form/form1"
+          },
           {
             path: "/form/basic-form",
             name: "basicform",
@@ -104,6 +112,10 @@ export const asyncRoutes = [
     meta: { title: "权限测试", icon: "lock", roles: ["admin"] },
     component: Layout,
     children: [
+      {
+        path: "/permission",
+        redirect: "/permission/page"
+      },
       {
         path: "/permission/page",
         name: "PagePermission",
