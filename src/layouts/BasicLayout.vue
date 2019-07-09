@@ -6,16 +6,18 @@
         <navbar />
       </div>
       <app-main />
+      <right-panel></right-panel>
     </div>
   </div>
 </template>
 
 <script>
+import RightPanel from "@/components/RightPanel";
 import { mapState } from "vuex";
 import { Sidebar, Navbar, AppMain } from "./components/index.js";
 export default {
   name: "BasicLayout",
-  components: { Sidebar, Navbar, AppMain },
+  components: { Sidebar, Navbar, AppMain, RightPanel },
   computed: {
     ...mapState({
       sidebar: state => state.app.sidebar
