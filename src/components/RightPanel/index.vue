@@ -6,7 +6,7 @@
         class="handle-button"
         :style="{
           top: buttonTop + 'px',
-          'background-color': '#000'
+          'background-color': theme
         }"
         @click="show = !show"
       >
@@ -37,6 +37,11 @@ export default {
     return {
       show: false
     };
+  },
+  computed: {
+    theme() {
+      return this.$store.state.settings.theme;
+    }
   },
   watch: {
     show(value) {

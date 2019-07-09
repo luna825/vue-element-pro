@@ -18,6 +18,7 @@ import store from "./store/index";
 
 import "normalize.css/normalize.css";
 import "element-ui/lib/theme-chalk/index.css";
+import "./styles/element-variables.scss";
 import "@/styles/index.scss"; //全局样式
 
 import "./icons"; // icon
